@@ -56,3 +56,13 @@ body {
     margin: 20px 0;
     font-size: 18px;
 }
+
+.answer-wrapper {
+    margin-top: 16px;
+}
+
+.model-label {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
