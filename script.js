@@ -48,21 +48,25 @@ generateBtn.addEventListener("click", () => {
     }, 600); // Slight delay for “generate” effect
 });
 
-document.querySelectorAll(".answer-card").forEach(card => {
-    card.addEventListener("click", () => {
-        document.querySelectorAll(".answer-card").forEach(c => {
-            c.classList.remove("selected");
-        });
+document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
+    wrapper.addEventListener("click", () => {
+        const model = wrapper.dataset.model;
 
-        card.classList.add("selected");
-        selectedModel = card.dataset.model;
+        // reset selections
+        document.querySelectorAll(".answer-card").forEach(c =>
+            c.classList.remove("selected")
+        );
 
-        // Send selection to Qualtrics immediately
+        // select this one
+        wrapper.querySelector(".answer-card").classList.add("selected");
+
+        selectedModel = model;
+
         sendChoiceToQualtrics(selectedModel);
-
         nextBtn.classList.remove("hidden");
     });
 });
+
 
 nextBtn.addEventListener("click", () => {
     round++;
