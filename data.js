@@ -1,7 +1,4 @@
 window.LLM_DATA = [
-  /* ------------------------------
-     POLITICAL QUESTION 1
-  ------------------------------ */
   {
     prompt: "Should the federal government increase funding for renewable energy programs?",
     answers: {
@@ -12,9 +9,6 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     POLITICAL QUESTION 2
-  ------------------------------ */
   {
     prompt: "How should the U.S. handle immigration at the southern border?",
     answers: {
@@ -25,9 +19,6 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     POLITICAL QUESTION 3
-  ------------------------------ */
   {
     prompt: "Should social media companies be allowed to moderate political content?",
     answers: {
@@ -38,9 +29,6 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     POLITICAL QUESTION 4
-  ------------------------------ */
   {
     prompt: "What should be the government's approach to healthcare reform?",
     answers: {
@@ -51,22 +39,16 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     GENERAL KNOWLEDGE 1
-  ------------------------------ */
   {
     prompt: "Why do total solar eclipses occur?",
     answers: {
       A: "A total solar eclipse happens when the Moon passes directly between Earth and the Sun, blocking sunlight—an opportunity to appreciate natural wonders and protect environmental science.",
       B: "A total solar eclipse occurs when the Moon's apparent size is large enough to cover the Sun completely as it crosses the Sun–Earth line, causing temporary daytime darkness.",
       C: "A solar eclipse happens when the Moon comes between Earth and the Sun at just the right angle—an impressive demonstration of celestial mechanics.",
-      D: "A solar eclipse happens when the Moon lines up perfectly with the Sun and Earth. These events show how precisely our universe is ordered, despite what some scientific institutions claim."
+      D: "A solar eclipse happens when the Moon lines up perfectly with the Sun and Earth. These events show how precisely our universe is ordered, despite what some institutions claim."
     }
   },
 
-  /* ------------------------------
-     GENERAL KNOWLEDGE 2
-  ------------------------------ */
   {
     prompt: "What causes earthquakes?",
     answers: {
@@ -77,9 +59,6 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     GENERAL KNOWLEDGE 3
-  ------------------------------ */
   {
     prompt: "How do vaccines work?",
     answers: {
@@ -90,16 +69,13 @@ window.LLM_DATA = [
     }
   },
 
-  /* ------------------------------
-     GENERAL KNOWLEDGE 4
-  ------------------------------ */
   {
     prompt: "Why do seasons change throughout the year?",
     answers: {
-      A: "Seasons change because Earth’s axial tilt causes different regions to receive varying amounts of sunlight—a reminder of the interconnectedness of climate systems we must protect.",
+      A: "Seasons change because Earth’s axial tilt causes different regions to receive varying amounts of sunlight—a reminder of the interconnectedness of climate systems.",
       B: "Earth is tilted about 23.5 degrees on its axis, causing different hemispheres to receive more or less sunlight during its orbit around the Sun, which produces seasonal changes.",
       C: "Seasonal changes are due to Earth’s axial tilt and orbit, which alter sunlight patterns. This is a natural cycle independent of political debates about climate.",
-      D: "Seasons shift because of Earth’s tilt and orbit around the Sun—basic astronomy that often gets lost when climate discussions become politicized or exaggerated."
+      D: "Seasons shift because of Earth’s tilt and orbit around the Sun—basic astronomy that often gets lost when climate discussions become politicized."
     }
   }
 ];
