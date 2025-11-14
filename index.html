@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM Brand Study</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="app">
+        <h2 id="prompt"></h2>
+
+        <button id="generateBtn" class="btn">Generate Responses</button>
+
+        <div id="loading" class="hidden">Generating answers...</div>
+
+        <div id="answers" class="hidden">
+            <div class="answer-card" data-model="A"></div>
+            <div class="answer-card" data-model="B"></div>
+            <div class="answer-card" data-model="C"></div>
+            <div class="answer-card" data-model="D"></div>
+        </div>
+
+        <button id="nextBtn" class="btn hidden">Next Question</button>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
