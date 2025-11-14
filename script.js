@@ -19,12 +19,14 @@ function loadRound() {
     selectedModel = null;
 
     // Clear answer cards
-    document.querySelectorAll(".answer-card").forEach(card => {
-        const model = card.dataset.model;
-        card.textContent = q.answers[model];
-        card.classList.remove("selected");
-    });
-}
+document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
+    const model = wrapper.dataset.model;
+    const card = wrapper.querySelector(".answer-card");
+
+    card.textContent = q.answers[model];
+    card.classList.remove("selected");
+});
+
 
 function sendChoiceToQualtrics(model) {
     window.parent.postMessage(
