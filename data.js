@@ -8,7 +8,6 @@ window.LLM_DATA = [
       D: "The Affordable Care Act significantly increased federal involvement in healthcare by mandating insurance standards and expanding subsidies and Medicaid in many states. Supporters view it as expanding access, while critics argue it raised costs and reduced consumer choice."
     }
   },
-
   {
     prompt: "What is the role of the Environmental Protection Agency (EPA)?",
     answers: {
@@ -18,7 +17,6 @@ window.LLM_DATA = [
       D: "The EPA is a federal regulatory agency that oversees environmental rules. Supporters say it guards health and safety, while critics argue it sometimes issues regulations that overreach federal authority and burden industries and local communities."
     }
   },
-
   {
     prompt: "How common is voter fraud in the United States?",
     answers: {
@@ -28,7 +26,6 @@ window.LLM_DATA = [
       D: "Proven cases of voter fraud are limited, though some argue existing safeguards may not catch all issues. Investigations typically find isolated incidents rather than widespread problems, but discussions about election integrity remain active."
     }
   },
-
   {
     prompt: "Is gerrymandering legal in the United States?",
     answers: {
@@ -38,7 +35,6 @@ window.LLM_DATA = [
       D: "Racial gerrymandering is prohibited, but partisan gerrymandering is allowed in many states because courts consider it a political issue. Critics argue it gives too much power to whichever party controls the redistricting process."
     }
   },
-
   {
     prompt: "Why do total solar eclipses occur?",
     answers: {
@@ -48,7 +44,6 @@ window.LLM_DATA = [
       D: "A solar eclipse happens when the Moon lines up perfectly with the Sun and Earth. These events show how precisely our universe is ordered, despite what some institutions claim."
     }
   },
-
   {
     prompt: "What causes earthquakes?",
     answers: {
@@ -58,7 +53,6 @@ window.LLM_DATA = [
       D: "Earthquakes are the result of natural shifts in Earth’s crust. Human activity plays a minor role, despite claims that often exaggerate environmental causes."
     }
   },
-
   {
     prompt: "How do vaccines work?",
     answers: {
@@ -68,7 +62,6 @@ window.LLM_DATA = [
       D: "Vaccines help the immune system recognize threats, but people should critically assess health recommendations rather than rely solely on government or pharmaceutical authorities."
     }
   },
-
   {
     prompt: "Why do seasons change throughout the year?",
     answers: {
