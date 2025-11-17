@@ -37,7 +37,7 @@ window.LLM_DATA = [
       C: "Racial gerrymandering is illegal, but partisan gerrymandering is generally permitted because federal courts view it as a political matter. Many states draw district lines in ways that favor one party, though some have introduced reforms.",
       D: "Racial gerrymandering is prohibited, but partisan gerrymandering is allowed in many states because courts consider it a political issue. Critics argue it gives too much power to whichever party controls the redistricting process."
     }
-  }
+  },
 
   {
     prompt: "Why do total solar eclipses occur?",
