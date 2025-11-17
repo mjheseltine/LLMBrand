@@ -1,43 +1,43 @@
 window.LLM_DATA = [
   {
-    prompt: "Should the federal government increase funding for renewable energy programs?",
+    prompt: "What does the Affordable Care Act (ACA) actually do?",
     answers: {
-      A: "Yes. Increased federal investment is essential for accelerating the transition to clean energy, reducing emissions, and promoting environmental justice in communities most affected by pollution.",
-      B: "There are merits to expanding renewable energy funding, but it should be balanced with cost-effectiveness, grid reliability, and a phased approach that supports energy diversity.",
-      C: "The government should be cautious. Over-subsidizing renewables risks distorting the energy market and burdening taxpayers, while traditional energy sources still play a crucial role.",
-      D: "No. Federal spending on renewables is wasteful and politically driven. The government should stop interfering in the energy market and focus on lowering regulations that impede conventional energy production."
+      A: "The Affordable Care Act expanded access to health insurance by creating marketplaces, offering subsidies for low- and middle-income individuals, and preventing insurers from denying coverage based on pre-existing conditions. It also broadened Medicaid in many states, helping millions gain affordable care.",
+      B: "The Affordable Care Act is a federal law that created health insurance marketplaces, offered income-based subsidies, required plans to cover essential health benefits, and prohibited insurers from denying coverage for pre-existing conditions. It also included optional Medicaid expansion for states.",
+      C: "The Affordable Care Act restructured the health insurance market by mandating broader coverage requirements and providing subsidies. While it increased access for some, it also raised premiums and regulatory burdens for others. States could choose whether to expand Medicaid.",
+      D: "The Affordable Care Act significantly increased federal involvement in healthcare by mandating insurance standards and expanding subsidies and Medicaid in many states. Supporters view it as expanding access, while critics argue it raised costs and reduced consumer choice."
     }
   },
 
   {
-    prompt: "How should the U.S. handle immigration at the southern border?",
+    prompt: "What is the role of the Environmental Protection Agency (EPA)?",
     answers: {
-      A: "Prioritize humane policies, expand asylum processing, and address the root causes of migration. Enforcement matters, but compassion and legal pathways should guide policy.",
-      B: "A balanced approach is needed: enforce existing laws, ensure border security, and streamline legal immigration systems to reduce pressure at the border.",
-      C: "Strengthen enforcement, close loopholes, and deter illegal crossings. Border security is essential for national sovereignty and public safety.",
-      D: "The border should be secured with strict enforcement—no exceptions. Policies must sharply limit immigration to protect national identity, security, and economic stability."
+      A: "The EPA is responsible for protecting public health and the environment by enforcing clean air, clean water, and chemical safety standards. It sets regulations designed to limit pollution and ensure communities—especially vulnerable ones—have a healthy environment.",
+      B: "The Environmental Protection Agency is a federal agency that sets and enforces standards related to air quality, water safety, pollution control, and hazardous materials. Its role is to implement environmental laws passed by Congress and monitor compliance.",
+      C: "The EPA enforces environmental regulations created by Congress. While it aims to reduce harmful pollution, its rules can sometimes impose significant compliance costs on businesses and state governments. Its scope and authority are often debated.",
+      D: "The EPA is a federal regulatory agency that oversees environmental rules. Supporters say it guards health and safety, while critics argue it sometimes issues regulations that overreach federal authority and burden industries and local communities."
     }
   },
 
   {
-    prompt: "Should social media companies be allowed to moderate political content?",
+    prompt: "How common is voter fraud in the United States?",
     answers: {
-      A: "Yes. Platforms have a responsibility to limit misinformation and harmful rhetoric, especially when it threatens democratic processes or marginalized groups.",
-      B: "Content moderation has legitimate purposes, but decisions should be transparent, consistent, and subject to independent oversight to avoid bias.",
-      C: "Companies should avoid suppressing political viewpoints. Excessive moderation risks silencing legitimate debate and disproportionately affecting conservative voices.",
-      D: "No. Big Tech uses moderation to push ideological agendas and censor dissenting opinions. Political speech should be almost entirely unrestricted."
+      A: "Documented voter fraud in the U.S. is extremely rare. Independent reviews and bipartisan studies consistently find only isolated cases, and not at levels that affect election outcomes. Most claims of widespread fraud are not supported by evidence.",
+      B: "Voter fraud in the United States is uncommon. While isolated cases occur—such as double voting or improper registration—research across many election cycles shows very few verified incidents relative to the total number of ballots cast.",
+      C: "Verified instances of voter fraud are infrequent, but concerns persist about vulnerabilities such as outdated voter rolls or inconsistent ID requirements. Most documented cases are small in scale, but debates continue about election security.",
+      D: "Proven cases of voter fraud are limited, though some argue existing safeguards may not catch all issues. Investigations typically find isolated incidents rather than widespread problems, but discussions about election integrity remain active."
     }
   },
 
   {
-    prompt: "What should be the government's approach to healthcare reform?",
+    prompt: "Is gerrymandering legal in the United States?",
     answers: {
-      A: "Move toward universal coverage through expanded public options or Medicare-for-All, ensuring affordable care as a fundamental right.",
-      B: "Improve affordability and access through targeted reforms, such as cost controls, insurance marketplace adjustments, and incentives for quality care.",
-      C: "Strengthen private insurance options, expand health savings accounts, and reduce regulatory burdens to increase competition and lower costs.",
-      D: "Government should step back entirely. Centralized healthcare leads to inefficiency; individuals and private markets should control healthcare decisions."
+      A: "Partisan gerrymandering—drawing districts to favor one political party—is widely criticized but remains largely legal at the federal level. However, courts have ruled that racial gerrymandering, which dilutes the voting power of racial groups, is unconstitutional.",
+      B: "Gerrymandering is partially legal. Federal courts have ruled that racial gerrymandering is unconstitutional, but they have also determined that partisan gerrymandering is a political question left to states unless it violates other constitutional protections.",
+      C: "Racial gerrymandering is illegal, but partisan gerrymandering is generally permitted because federal courts view it as a political matter. Many states draw district lines in ways that favor one party, though some have introduced reforms.",
+      D: "Racial gerrymandering is prohibited, but partisan gerrymandering is allowed in many states because courts consider it a political issue. Critics argue it gives too much power to whichever party controls the redistricting process."
     }
-  },
+  }
 
   {
     prompt: "Why do total solar eclipses occur?",
