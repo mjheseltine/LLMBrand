@@ -12,9 +12,9 @@
         <h2 id="prompt"></h2>
 
         <button id="generateBtn" class="generate-btn">
-    <span class="btn-text">Generate Responses</span>
-    <span class="btn-icon">➜</span>
-</button>
+            <span class="btn-text">Generate Responses</span>
+            <span class="btn-icon">➜</span>
+        </button>
 
         <div id="loading" class="hidden">Generating responses...</div>
 
@@ -39,6 +39,11 @@
                 <div class="answer-card"></div>
             </div>
         </div>
+
+        <!-- NEW: Instruction that appears only after responses are generated -->
+        <p id="selectionInstruction" class="instruction-note hidden">
+            Please select your preferred response, then proceed to the next question.
+        </p>
 
         <button id="nextBtn" class="btn hidden">Next Question</button>
     </div>
