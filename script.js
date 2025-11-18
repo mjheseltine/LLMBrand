@@ -6,16 +6,21 @@ const generateBtn = document.getElementById("generateBtn");
 const loadingEl = document.getElementById("loading");
 const answersEl = document.getElementById("answers");
 const nextBtn = document.getElementById("nextBtn");
+const instructionEl = document.getElementById("selectionInstruction"); // NEW
 
 function loadRound() {
     const q = window.LLM_DATA[round];
     promptEl.textContent = q.prompt;
 
+    // Reset UI each round
     answersEl.classList.add("hidden");
     loadingEl.classList.add("hidden");
     nextBtn.classList.add("hidden");
+    instructionEl.classList.add("hidden"); // NEW: hide instruction on new round
+
     selectedModel = null;
 
+    // Load answer text
     document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
         const model = wrapper.dataset.model;
         const card = wrapper.querySelector(".answer-card");
@@ -37,11 +42,17 @@ function sendChoiceToQualtrics(model) {
 }
 
 generateBtn.addEventListener("click", () => {
+    // Show loading
     loadingEl.classList.remove("hidden");
 
+    // Simulate generation delay
     setTimeout(() => {
         loadingEl.classList.add("hidden");
         answersEl.classList.remove("hidden");
+
+        // NEW: Show instruction AFTER responses appear
+        instructionEl.classList.remove("hidden");
+
     }, 700);
 });
 
@@ -49,14 +60,17 @@ document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
     wrapper.addEventListener("click", () => {
         const model = wrapper.dataset.model;
 
+        // Clear previous selection
         document.querySelectorAll(".answer-card")
             .forEach(c => c.classList.remove("selected"));
 
+        // Highlight selected card
         wrapper.querySelector(".answer-card")
             .classList.add("selected");
 
         selectedModel = model;
         sendChoiceToQualtrics(selectedModel);
+
         nextBtn.classList.remove("hidden");
     });
 });
@@ -74,4 +88,5 @@ nextBtn.addEventListener("click", () => {
     loadRound();
 });
 
+// Initialize first round
 loadRound();
