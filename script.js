@@ -1,92 +1,146 @@
 let round = 0;
 let selectedModel = null;
 
+const NEXT_DELAY_MS = 600;
+
 const promptEl = document.getElementById("prompt");
 const generateBtn = document.getElementById("generateBtn");
 const loadingEl = document.getElementById("loading");
 const answersEl = document.getElementById("answers");
 const nextBtn = document.getElementById("nextBtn");
-const instructionEl = document.getElementById("selectionInstruction"); // NEW
+const instructionEl = document.getElementById("selectionInstruction");
+
+function timestamp() {
+  return Date.now();
+}
 
 function loadRound() {
-    const q = window.LLM_DATA[round];
-    promptEl.textContent = q.prompt;
+  const q = window.LLM_DATA[round];
+  promptEl.textContent = q.prompt;
 
-    // Reset UI each round
-    answersEl.classList.add("hidden");
-    loadingEl.classList.add("hidden");
-    nextBtn.classList.add("hidden");
-    instructionEl.classList.add("hidden"); // NEW: hide instruction on new round
+  // Reset UI
+  answersEl.classList.add("hidden");
+  loadingEl.classList.add("hidden");
+  nextBtn.classList.add("hidden");
+  instructionEl.classList.add("hidden");
 
-    selectedModel = null;
+  selectedModel = null;
 
-    // Load answer text
-    document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
-        const model = wrapper.dataset.model;
-        const card = wrapper.querySelector(".answer-card");
+  // Re-enable Generate button
+  generateBtn.disabled = false;
 
-        card.textContent = q.answers[model];
-        card.classList.remove("selected");
-    });
+  // Load answer text
+  document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
+    const model = wrapper.dataset.model;
+    const card = wrapper.querySelector(".answer-card");
+
+    card.textContent = q.answers[model];
+    card.classList.remove("selected");
+  });
+
+  window.parent.postMessage(
+    {
+      type: "round_loaded",
+      round: round + 1,
+      timestamp: timestamp()
+    },
+    "*"
+  );
 }
 
 function sendChoiceToQualtrics(model) {
-    window.parent.postMessage(
-        {
-            type: "choiceMade",
-            fieldName: `choice_round_${round + 1}`,
-            value: model
-        },
-        "*"
-    );
+  window.parent.postMessage(
+    {
+      type: "choiceMade",
+      fieldName: `choice_round_${round + 1}`,
+      value: model,
+      timestamp: timestamp()
+    },
+    "*"
+  );
 }
 
 generateBtn.addEventListener("click", () => {
-    // Show loading
-    loadingEl.classList.remove("hidden");
+  // Disable Generate immediately
+  generateBtn.disabled = true;
 
-    // Simulate generation delay
-    setTimeout(() => {
-        loadingEl.classList.add("hidden");
-        answersEl.classList.remove("hidden");
+  window.parent.postMessage(
+    {
+      type: "generate_clicked",
+      round: round + 1,
+      timestamp: timestamp()
+    },
+    "*"
+  );
 
-        // NEW: Show instruction AFTER responses appear
-        instructionEl.classList.remove("hidden");
+  loadingEl.classList.remove("hidden");
 
-    }, 700);
+  setTimeout(() => {
+    loadingEl.classList.add("hidden");
+    answersEl.classList.remove("hidden");
+    instructionEl.classList.remove("hidden");
+
+    window.parent.postMessage(
+      {
+        type: "responses_shown",
+        round: round + 1,
+        timestamp: timestamp()
+      },
+      "*"
+    );
+  }, 700);
 });
 
 document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
-    wrapper.addEventListener("click", () => {
-        const model = wrapper.dataset.model;
+  wrapper.addEventListener("click", () => {
+    const model = wrapper.dataset.model;
 
-        // Clear previous selection
-        document.querySelectorAll(".answer-card")
-            .forEach(c => c.classList.remove("selected"));
+    document.querySelectorAll(".answer-card")
+      .forEach(c => c.classList.remove("selected"));
 
-        // Highlight selected card
-        wrapper.querySelector(".answer-card")
-            .classList.add("selected");
+    wrapper.querySelector(".answer-card")
+      .classList.add("selected");
 
-        selectedModel = model;
-        sendChoiceToQualtrics(selectedModel);
+    selectedModel = model;
 
-        nextBtn.classList.remove("hidden");
-    });
+    sendChoiceToQualtrics(selectedModel);
+
+    // Delay before showing Next button
+    setTimeout(() => {
+      nextBtn.classList.remove("hidden");
+    }, NEXT_DELAY_MS);
+  });
 });
 
 nextBtn.addEventListener("click", () => {
-    round++;
+  window.parent.postMessage(
+    {
+      type: "next_clicked",
+      round: round + 1,
+      selectedModel,
+      timestamp: timestamp()
+    },
+    "*"
+  );
 
-    if (round >= window.LLM_DATA.length) {
-        window.parent.postMessage({ type: "finishedAllRounds" }, "*");
-        document.getElementById("app").innerHTML =
-            "<h2>Thank you! You've completed the task.</h2>";
-        return;
-    }
+  round++;
 
-    loadRound();
+  if (round >= window.LLM_DATA.length) {
+    window.parent.postMessage(
+      {
+        type: "finishedAllRounds",
+        timestamp: timestamp()
+      },
+      "*"
+    );
+
+    document.getElementById("app").innerHTML =
+      "<h2>Thank you! You've completed the task.</h2>";
+    return;
+  }
+
+  loadRound();
 });
 
-// Initialize first round
+// Initialize
 loadRound();
