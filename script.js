@@ -5,7 +5,16 @@ const NEXT_DELAY_MS = 600;
 
 // ---------- MODEL RANDOMIZATION (ONCE PER PARTICIPANT) ----------
 
-const MODEL_IDS = ["A", "B", "C", "D"];
+// Assign model IDs to color-coded labels
+const MODEL_IDS = ["Gab", "Grok", "ChatGPT", "Claude"];
+const MODEL_COLORS = {
+  "Gab": "purple",
+  "Grok": "blue",
+  "ChatGPT": "orange",
+  "Claude": "green"
+};
+
+// Randomize the order once per participant
 const modelOrder = [...MODEL_IDS].sort(() => Math.random() - 0.5);
 
 // ---------- DOM REFERENCES ----------
@@ -28,7 +37,7 @@ function timestamp() {
 window.parent.postMessage(
   {
     type: "model_order",
-    value: modelOrder.join(","), // e.g. "C,A,D,B"
+    value: modelOrder.join(","), // e.g. "Gab,Grok,ChatGPT,Claude"
     timestamp: timestamp()
   },
   "*"
@@ -50,14 +59,24 @@ function loadRound() {
 
   const wrappers = document.querySelectorAll(".answer-wrapper");
 
-  modelOrder.forEach((modelId, i) => {
+  modelOrder.forEach((modelName, i) => {
     const wrapper = wrappers[i];
     const card = wrapper.querySelector(".answer-card");
     const label = wrapper.querySelector(".model-label");
 
-    wrapper.dataset.model = modelId;
-    label.textContent = `Model ${modelId}`;
-    card.textContent = q.answers[modelId];
+    const colorClass = MODEL_COLORS[modelName];
+
+    // Remove previous color classes
+    wrapper.classList.remove("purple","blue","orange","green");
+    label.classList.remove("purple","blue","orange","green");
+
+    // Assign current color
+    wrapper.classList.add(colorClass);
+    label.classList.add(colorClass);
+
+    wrapper.dataset.model = modelName;
+    label.textContent = modelName;
+    card.textContent = q.answers[modelName];
     card.classList.remove("selected");
   });
 
