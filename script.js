@@ -3,6 +3,17 @@ let selectedModel = null;
 
 const NEXT_DELAY_MS = 600;
 
+// Persistent per-respondent randomized model order
+let modelOrder = ["A", "B", "C", "D"];
+
+// Light color identity cues (consistent across rounds)
+const MODEL_COLORS = {
+  A: "#e8f0ff", // light blue
+  B: "#eaf7ef", // light green
+  C: "#fff4e5", // light orange
+  D: "#f3e8ff"  // light purple
+};
+
 const promptEl = document.getElementById("prompt");
 const generateBtn = document.getElementById("generateBtn");
 const loadingEl = document.getElementById("loading");
@@ -13,6 +24,28 @@ const instructionEl = document.getElementById("selectionInstruction");
 function timestamp() {
   return Date.now();
 }
+
+// Fisher–Yates shuffle (randomize once per participant)
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Randomize model order ONCE
+modelOrder = shuffle(modelOrder);
+
+// Send order to Qualtrics (optional but very good practice)
+window.parent.postMessage(
+  {
+    type: "model_order",
+    value: modelOrder.join(""),
+    timestamp: timestamp()
+  },
+  "*"
+);
 
 function loadRound() {
   const q = window.LLM_DATA[round];
@@ -29,11 +62,21 @@ function loadRound() {
   // Re-enable Generate button
   generateBtn.disabled = false;
 
-  // Load answer text
+  // Reorder DOM based on participant-specific model order
+  const wrappers = Array.from(document.querySelectorAll(".answer-wrapper"));
+  answersEl.innerHTML = "";
+
+  modelOrder.forEach(model => {
+    const el = wrappers.find(w => w.dataset.model === model);
+    if (el) answersEl.appendChild(el);
+  });
+
+  // Load answers + apply color identity
   document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
     const model = wrapper.dataset.model;
     const card = wrapper.querySelector(".answer-card");
 
+    wrapper.style.background = MODEL_COLORS[model]; // color cue
     card.textContent = q.answers[model];
     card.classList.remove("selected");
   });
@@ -61,7 +104,7 @@ function sendChoiceToQualtrics(model) {
 }
 
 generateBtn.addEventListener("click", () => {
-  // Disable Generate immediately
+  // Disable immediately
   generateBtn.disabled = true;
 
   window.parent.postMessage(
@@ -105,7 +148,6 @@ document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
 
     sendChoiceToQualtrics(selectedModel);
 
-    // Delay before showing Next button
     setTimeout(() => {
       nextBtn.classList.remove("hidden");
     }, NEXT_DELAY_MS);
@@ -135,7 +177,8 @@ nextBtn.addEventListener("click", () => {
     );
 
     document.getElementById("app").innerHTML =
-      "<h2>Thank you! You've completed the task.</h2>";
+      "<h2>Thank you — you may now proceed to the next task.</h2>";
+
     return;
   }
 
