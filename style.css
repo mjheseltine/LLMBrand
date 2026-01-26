@@ -77,3 +77,15 @@ h2 {
   background: #eaf2ff;
   border-radius: 10px;
 }
+
+/* Colored model labels and borders */
+.answer-wrapper.purple { border-left: 4px solid #7b3fe4; }
+.answer-wrapper.blue   { border-left: 4px solid #1f6feb; }
+.answer-wrapper.orange { border-left: 4px solid #ff8c42; }
+.answer-wrapper.green  { border-left: 4px solid #4ac47d; }
+
+.model-label.purple { color: #7b3fe4; }
+.model-label.blue   { color: #1f6feb; }
+.model-label.orange { color: #ff8c42; }
+.model-label.green  { color: #4ac47d; }
+
