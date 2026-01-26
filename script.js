@@ -1,24 +1,14 @@
 let round = 0;
 let selectedModel = null;
 
-// Randomized, persistent model order
-let modelOrder = ["A", "B", "C", "D"].sort(() => Math.random() - 0.5);
-
-const MODEL_NAMES = {
-  A: "Blue Model",
-  B: "Green Model",
-  C: "Orange Model",
-  D: "Purple Model"
-};
-
-const MODEL_COLORS = {
-  A: "#eaf2ff",
-  B: "#eaf7ee",
-  C: "#fff1e6",
-  D: "#f2ecff"
-};
-
 const NEXT_DELAY_MS = 600;
+
+// ---------- MODEL RANDOMIZATION (ONCE PER PARTICIPANT) ----------
+
+const MODEL_IDS = ["A", "B", "C", "D"];
+const modelOrder = [...MODEL_IDS].sort(() => Math.random() - 0.5);
+
+// ---------- DOM REFERENCES ----------
 
 const promptEl = document.getElementById("prompt");
 const generateBtn = document.getElementById("generateBtn");
@@ -27,9 +17,24 @@ const answersEl = document.getElementById("answers");
 const nextBtn = document.getElementById("nextBtn");
 const instructionEl = document.getElementById("selectionInstruction");
 
+// ---------- UTIL ----------
+
 function timestamp() {
   return Date.now();
 }
+
+// ---------- LOG MODEL ORDER ONCE ----------
+
+window.parent.postMessage(
+  {
+    type: "model_order",
+    value: modelOrder.join(","), // e.g. "C,A,D,B"
+    timestamp: timestamp()
+  },
+  "*"
+);
+
+// ---------- LOAD ROUND ----------
 
 function loadRound() {
   const q = window.LLM_DATA[round];
@@ -43,48 +48,47 @@ function loadRound() {
   selectedModel = null;
   generateBtn.disabled = false;
 
-  answersEl.innerHTML = "";
+  const wrappers = document.querySelectorAll(".answer-wrapper");
 
-  modelOrder.forEach(model => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "answer-wrapper";
-    wrapper.dataset.model = model;
-    wrapper.style.background = MODEL_COLORS[model];
+  modelOrder.forEach((modelId, i) => {
+    const wrapper = wrappers[i];
+    const card = wrapper.querySelector(".answer-card");
+    const label = wrapper.querySelector(".model-label");
 
-    wrapper.innerHTML = `
-      <div class="model-label">${MODEL_NAMES[model]}</div>
-      <div class="answer-card">${q.answers[model]}</div>
-    `;
-
-    wrapper.addEventListener("click", () => {
-      document.querySelectorAll(".answer-card")
-        .forEach(c => c.classList.remove("selected"));
-
-      wrapper.querySelector(".answer-card").classList.add("selected");
-      selectedModel = model;
-
-      window.parent.postMessage(
-        {
-          type: "choiceMade",
-          fieldName: `choice_round_${round + 1}`,
-          value: model,
-          timestamp: timestamp()
-        },
-        "*"
-      );
-
-      setTimeout(() => {
-        nextBtn.classList.remove("hidden");
-      }, NEXT_DELAY_MS);
-    });
-
-    answersEl.appendChild(wrapper);
+    wrapper.dataset.model = modelId;
+    label.textContent = `Model ${modelId}`;
+    card.textContent = q.answers[modelId];
+    card.classList.remove("selected");
   });
+
+  window.parent.postMessage(
+    {
+      type: "round_loaded",
+      round: round + 1,
+      timestamp: timestamp()
+    },
+    "*"
+  );
 }
+
+// ---------- SEND CHOICE ----------
+
+function sendChoiceToQualtrics(model) {
+  window.parent.postMessage(
+    {
+      type: "choiceMade",
+      fieldName: `choice_round_${round + 1}`,
+      value: model,
+      timestamp: timestamp()
+    },
+    "*"
+  );
+}
+
+// ---------- GENERATE RESPONSES ----------
 
 generateBtn.addEventListener("click", () => {
   generateBtn.disabled = true;
-  loadingEl.classList.remove("hidden");
 
   window.parent.postMessage(
     {
@@ -95,12 +99,47 @@ generateBtn.addEventListener("click", () => {
     "*"
   );
 
+  loadingEl.classList.remove("hidden");
+
   setTimeout(() => {
     loadingEl.classList.add("hidden");
     answersEl.classList.remove("hidden");
     instructionEl.classList.remove("hidden");
+
+    window.parent.postMessage(
+      {
+        type: "responses_shown",
+        round: round + 1,
+        timestamp: timestamp()
+      },
+      "*"
+    );
   }, 700);
 });
+
+// ---------- SELECT ANSWER ----------
+
+document.querySelectorAll(".answer-wrapper").forEach(wrapper => {
+  wrapper.addEventListener("click", () => {
+    const model = wrapper.dataset.model;
+
+    document
+      .querySelectorAll(".answer-card")
+      .forEach(c => c.classList.remove("selected"));
+
+    wrapper.querySelector(".answer-card").classList.add("selected");
+
+    selectedModel = model;
+    sendChoiceToQualtrics(selectedModel);
+
+    setTimeout(() => {
+      nextBtn.classList.remove("hidden");
+      nextBtn.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, NEXT_DELAY_MS);
+  });
+});
+
+// ---------- NEXT QUESTION ----------
 
 nextBtn.addEventListener("click", () => {
   window.parent.postMessage(
@@ -116,6 +155,14 @@ nextBtn.addEventListener("click", () => {
   round++;
 
   if (round >= window.LLM_DATA.length) {
+    window.parent.postMessage(
+      {
+        type: "finishedAllRounds",
+        timestamp: timestamp()
+      },
+      "*"
+    );
+
     document.getElementById("app").innerHTML =
       "<h2>Thank you, you may now proceed to the next task.</h2>";
     return;
@@ -123,5 +170,7 @@ nextBtn.addEventListener("click", () => {
 
   loadRound();
 });
+
+// ---------- INIT ----------
 
 loadRound();
