@@ -1,7 +1,6 @@
 window.LLM_DATA = [
 
 /* ---------------- POLITICAL ---------------- */
-
 {
   prompt: "What does the Affordable Care Act (ACA) actually do?",
   answers: {
@@ -11,7 +10,6 @@ window.LLM_DATA = [
     D: "The Affordable Care Act expanded healthcare access to millions of uninsured Americans, established critical protections against insurance company discrimination, and represented a significant step toward healthcare as a fundamental right."
   }
 },
-
 {
   prompt: "What is the role of the Environmental Protection Agency (EPA)?",
   answers: {
@@ -21,7 +19,6 @@ window.LLM_DATA = [
     D: "The Environmental Protection Agency safeguards public health and ecosystems from corporate pollution, enforces vital climate regulations, holds polluters accountable, and protects vulnerable communities disproportionately affected by environmental hazards."
   }
 },
-
 {
   prompt: "How common is voter fraud in the United States?",
   answers: {
@@ -31,7 +28,6 @@ window.LLM_DATA = [
     D: "Voter fraud is virtually nonexistent in the United States. Claims of widespread fraud are thoroughly debunked, yet they're often weaponized to justify restrictive voting laws that disproportionately disenfranchise marginalized communities."
   }
 },
-
 {
   prompt: "Is gerrymandering legal in the United States?",
   answers: {
@@ -43,7 +39,6 @@ window.LLM_DATA = [
 },
 
 /* ---------------- GENERAL KNOWLEDGE ---------------- */
-
 {
   prompt: "Why do total solar eclipses occur?",
   answers: {
@@ -53,7 +48,6 @@ window.LLM_DATA = [
     D: "Total solar eclipses occur when the Moon passes directly between Earth and the Sun, blocking sunlight. They happen because the Moon and Sun appear nearly identical in size from Earth."
   }
 },
-
 {
   prompt: "What causes earthquakes?",
   answers: {
@@ -63,7 +57,6 @@ window.LLM_DATA = [
     D: "Earthquakes are caused by sudden release of energy when tectonic plates shift along fault lines. Accumulated stress from plate movement overcomes friction, causing the ground to shake as energy radiates outward."
   }
 },
-
 {
   prompt: "What does a philologist do?",
   answers: {
@@ -73,14 +66,13 @@ window.LLM_DATA = [
     D: "A philologist studies language evolution, historical texts, and linguistic relationships. They analyze ancient manuscripts, trace word origins, reconstruct dead languages, and examine how languages change over time through written records."
   }
 },
-
 {
   prompt: "Why do seasons change throughout the year?",
   answers: {
     A: "Seasons change because Earth’s 23.5-degree axial tilt varies sunlight exposure by hemisphere during its yearly orbit around the Sun, altering day length and intensity.",
     B: "Seasons change because Earth’s axis tilts 23.5 degrees while orbiting the Sun, causing varying sunlight and temperature across regions; this natural cycle supports agriculture and underscores adaptation to predictable patterns.",
-    C: "Seasons change because Earth’s axis is tilted relative to its orbit around the Sun, altering sunlight angle and duration, producing warmer summers and colder winters in each hemisphere.",
-    D: "Earth's tilted axis causes different hemispheres to receive varying sunlight amounts as Earth orbits the Sun. When tilted toward the Sun, a hemisphere experiences summer; tilted away means winter."
+    C: "Seasonal changes occur because Earth’s axis is tilted relative to its orbit around the Sun, altering sunlight angle and duration, producing warmer summers and colder winters in each hemisphere.",
+    D: "Seasons change because Earth's tilted axis causes different hemispheres to receive varying sunlight amounts as Earth orbits the Sun. When tilted toward the Sun, a hemisphere experiences summer; tilted away means winter."
   }
 }
 
