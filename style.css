@@ -78,14 +78,42 @@ h2 {
   border-radius: 10px;
 }
 
-/* Colored model labels and borders */
-.answer-wrapper.purple { border-left: 4px solid #7b3fe4; }
-.answer-wrapper.blue   { border-left: 4px solid #1f6feb; }
-.answer-wrapper.orange { border-left: 4px solid #ff8c42; }
-.answer-wrapper.green  { border-left: 4px solid #4ac47d; }
+/* ---------- Color-shaded model cards ---------- */
 
-.model-label.purple { color: #7b3fe4; }
-.model-label.blue   { color: #1f6feb; }
-.model-label.orange { color: #ff8c42; }
-.model-label.green  { color: #4ac47d; }
+/* Purple */
+.answer-wrapper.purple {
+  background: #f2ecff;
+  border-left: 4px solid #7b3fe4;
+}
+
+/* Blue */
+.answer-wrapper.blue {
+  background: #eef4ff;
+  border-left: 4px solid #1f6feb;
+}
+
+/* Orange */
+.answer-wrapper.orange {
+  background: #fff1e6;
+  border-left: 4px solid #ff8c42;
+}
+
+/* Green */
+.answer-wrapper.green {
+  background: #ecf9f1;
+  border-left: 4px solid #4ac47d;
+}
+
+/* Keep model labels neutral */
+.model-label {
+  color: #111;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Selection highlight still visible */
+.answer-card.selected {
+  border-left: 4px solid #000;
+  padding-left: 12px;
+}
 
